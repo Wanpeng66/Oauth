@@ -14,10 +14,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @author: wp
@@ -48,9 +52,21 @@ public class OauthController {
     String response_type02 ;
 
 
-    @GetMapping("/")
-    public String index(){
+    @RequestMapping("/")
+    public String index(HttpServletRequest request) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream(),"Utf-8"));
+        String str = "";
+        String wholeStr = "";
+        while((str = reader.readLine()) != null){
+            wholeStr += str;
+        }
+
         return "index";
+    }
+
+    @RequestMapping("/vue")
+    public String vue(){
+        return "vue";
     }
 
     @GetMapping("/getCode")

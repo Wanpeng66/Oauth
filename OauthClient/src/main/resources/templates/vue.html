@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:v-on="" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个 Vue 应用程序</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="vue">
+    {{message}}
+</div>
+<div id="v2">
+    <h1 v-if="ok">ok</h1>
+    <h1 v-else>no</h1>
+
+</div>
+
+<div id="v3">
+    <h1 v-if="para==='A'">A</h1>
+    <h1 v-else-if="para==='B'">B</h1>
+    <h1 v-else>C</h1>
+
+</div>
+
+<div id="v4">
+    <h1>{{hehe}}</h1>
+    <li v-for="item in items">
+       {{ item.message }}
+    </li>
+
+</div>
+<div id="v5">
+    <button v-on:click="sayHi">点我</button>
+</div>
+<div id="v6">
+    <div>名称：{{info.name}}</div>
+    <div>链接：<a v-bind:href="info.url" target="_blank">{{info.url}}</a> </div>
+
+</div>
+
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#vue',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+    var v2 = new Vue({
+        el: '#v2',
+        data: {
+            ok: true
+        }
+
+    });
+    var v3 = new Vue({
+        el:'#v3',
+        data:{
+            para:'A'
+        }
+    });
+
+    var v4 = new Vue({
+        el:'#v4',
+        data:{
+            items:[
+                {message:1,version:'v1'},
+                {message:2,version:'v2'}
+            ],
+            hehe:'return'
+        }
+    });
+
+    var v5 = new Vue({
+        el:'#v5',
+        data:{
+            message:'hello'
+        },
+        methods:{
+            sayHi:function (event) {
+                alert(this.message);
+            }
+        }
+    });
+
+    var v6 = new Vue({
+        el:'#v6',
+        data(){
+            return {
+                info:{
+                    name: null,
+                    url: null
+                }
+            }
+        },
+        mounted(){
+            var axios
+        .
+            get('data.json')
+                .then(response = > (this.info = response.data));
+        }
+
+    });
+</script>
+</body>
+</html>
