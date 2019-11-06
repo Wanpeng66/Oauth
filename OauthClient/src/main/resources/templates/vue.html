@@ -95,10 +95,9 @@
             }
         },
         mounted(){
-            var axios
-        .
-            get('data.json')
-                .then(response = > (this.info = response.data));
+            axios
+                .get('data.json')
+                .then(response => (this.info = response.data));
         }
 
     });
